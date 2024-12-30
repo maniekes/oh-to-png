@@ -1,0 +1,19 @@
+{
+  "name": "oh-to-png",
+  "version": "1.0.0",
+  "description": "serve openhab panels as static images for embedded devices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maniekes/oh-to-png.git"
+  },
+  "author": "Rafal Klimonda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maniekes/oh-to-png/issues"
+  },
+  "homepage": "https://github.com/maniekes/oh-to-png#readme"
+}
