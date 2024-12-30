@@ -1,0 +1,8 @@
+default:
+    resolution: '960x540'
+    delay: 2  
+devices:
+  device_1:
+    url: 'https://google.com'
+    resolution: '960x540'
+    delay: 2

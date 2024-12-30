@@ -1,30 +1,24 @@
 import express from 'express';
 import Pageres from 'pageres';
 import stream from 'stream';
-import dotenv from 'dotenv';
-
-const env = process.env.NODE_ENV || 'production';
-dotenv.config({ path: `.env.${env}` });
-dotenv.config();
+import fs from 'fs';
+import yaml from 'js-yaml';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-const OH_HOST = process.env.OH_HOST;
-const OH_RESOLUTION = process.env.OH_RESOLUTION || '960x540';
-const OH_KIOSK = process.env.OH_KIOSK || true;
-const dashboards = process.env.OH_ALLOWED_DASHBOARDS.split(',') || [];
-const kioskMode = OH_KIOSK ? '&kiosk=on' : '';
+const PORT = 3000;
 
 app.get('/screenshot', async (req, res) => {
-    const resolution = req.query.resolution || OH_RESOLUTION;
-    if(!dashboards.includes(req.query.dashboard)) {
-        console.error(`dashboard ${req.query.dashboard} not in allowed list!`);
-        res.status(500).send('dashboard not in allowed list!');
+    const fileContents = fs.readFileSync('./device-mappings.yaml', 'utf-8');
+    const mappings = yaml.load(fileContents);
+    const device = mappings.devices[req.query.device];
+    if(!device) {
+        console.error(`dashboard ${req.query.device} not in allowed list!`);
+        res.status(500).send('device not found in configuration list!');
         return;
     }
-    const url = `${OH_HOST}${req.query.dashboard}?${kioskMode}`
-    const delayTime = req.query.delay || 2;
-
+    const resolution = device.resolution || mappings.default.resolution || '960x540';
+    const url = device.url;
+    const delayTime = device.delay || mappings.default.delay || 2;
     try {
         // Capture the screenshot with Pageres
         const pageres = new Pageres({ delay: delayTime })
