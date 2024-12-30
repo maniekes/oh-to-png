@@ -2,6 +2,7 @@
   "name": "oh-to-png",
   "version": "1.0.0",
   "description": "serve openhab panels as static images for embedded devices",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/maniekes/oh-to-png/issues"
   },
-  "homepage": "https://github.com/maniekes/oh-to-png#readme"
+  "homepage": "https://github.com/maniekes/oh-to-png#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "pageres": "^8.1.0",
+    "pm2": "^5.4.3"
+  }
 }
