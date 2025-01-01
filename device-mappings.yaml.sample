@@ -1,8 +1,9 @@
 default:
     resolution: '960x540'
-    delay: 2  
+    delay: 0
+    grayscale: true
+    negate: true
 devices:
+# url is mandatory, you can also override any of defaults here
   device_1:
     url: 'https://google.com'
-    resolution: '960x540'
-    delay: 2

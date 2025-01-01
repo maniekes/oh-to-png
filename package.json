@@ -5,7 +5,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start index.js --name oh-to-png",
+    "stop": "pm2 stop oh-to-png",
+    "startup": "pm2 startup",
+    "restart": "pm2 restart oh-to-png",
+    "delete": "pm2 delete oh-to-png"
   },
   "repository": {
     "type": "git",
@@ -22,6 +26,7 @@
     "express": "^4.21.2",
     "js-yaml": "^4.1.0",
     "pageres": "^8.1.0",
-    "pm2": "^5.4.3"
+    "pm2": "^5.4.3",
+    "sharp": "^0.33.5"
   }
 }
