@@ -1,9 +1,15 @@
 # oh-to-png
-serve openhab panels as static images for embedded devices
+i have couple of EspHome devices which are displaying weather/home status/temperatures etc. i love EspHome but i hate creating graphical interfaces using C/yaml/lvgl. for read-only panels i think this is too much overhead. instead i preffer to create nice design using proper html/css/js somwhere else and just load into them, 
+
+[HABPanel](https://www.openhab.org/docs/ui/habpanel/habpanel.html#the-main-menu) is something that fits perfectly into my area of interests
+
+this little script will help to render complex webpages with javascript into simple png file which can be easly transfered into dummy esphome device and they might look like this:
+![device](img/sample-device.png)
 
 ## sample config
 1. create some panels in habpanel for example
-2. create device-mappings.yml file with resolutuon, links etc:
+1. check out this repo somewhere on ur server
+1. create device-mappings.yml file with resolutuon, links etc:
     ```yaml
     default:
         resolution: '960x540'
@@ -14,11 +20,14 @@ serve openhab panels as static images for embedded devices
     device_1:
         url: 'https://google.com'
     ```
-3. run `npm install`
-4. test if it works:
+1. run `npm install`
+1. test if it works:
     - `npm run start`
     - open http://localhost:3001/screenshot?device=device_1
-5. if all works fine install it as service  `npm run startup` (and follow instructions from pm2)
+    - depending what u configured something like this should appear
+    ![sample output](img/sample-output.png)
+1. if all works fine install it as service  `npm run startup` (and follow instructions from pm2)
+2. you can browse logs using standard pm2 commands [check quickstart](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
 ## sample usage in esphome:
 
