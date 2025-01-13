@@ -25,6 +25,8 @@ const argv = yargs(hideBin(process.argv))
     .argv;
 const configPath = argv.config;
 const configPort = argv.port;
+const fileContents = fs.readFileSync(configPath, 'utf-8');
+yaml.load(fileContents);
 
 app.get('/screenshot', async (req, res) => {
     const fileContents = fs.readFileSync(configPath, 'utf-8');
