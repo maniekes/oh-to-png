@@ -1,14 +1,33 @@
+#!/usr/bin/env node
 import express from 'express';
 import Pageres from 'pageres';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import sharp from 'sharp';
+import yargs from "yargs";
+import {hideBin} from "yargs/helpers";
 
 const app = express();
-const PORT = 3001;
+const argv = yargs(hideBin(process.argv))
+    .option('config', {
+        alias: 'c',
+        type: 'string',
+        description: 'Path to the configuration file',
+        default: process.env.CONFIG_FILE || './device-mappings.yaml',
+    })
+    .option('port', {
+        alias: 'p',
+        type: 'number',
+        description: 'Port to run the server on',
+        default: process.env.CONFIG_PORT || 3001,
+    })
+    .help()
+    .argv;
+const configPath = argv.config;
+const configPort = argv.port;
 
 app.get('/screenshot', async (req, res) => {
-    const fileContents = fs.readFileSync('./device-mappings.yaml', 'utf-8');
+    const fileContents = fs.readFileSync(configPath, 'utf-8');
     const mappings = yaml.load(fileContents);
     const foundDevice = mappings.devices[req.query.device];
     if (!foundDevice) {
@@ -60,6 +79,6 @@ app.get('/screenshot', async (req, res) => {
     console.log();
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+app.listen(configPort, () => {
+    console.log(`Server running at http://localhost:${configPort}`);
 });

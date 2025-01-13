@@ -5,11 +5,15 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --name oh-to-png",
+    "start": "node index.js",
+    "watch": "node --watch index.js",
     "stop": "pm2 stop oh-to-png",
     "startup": "pm2 startup",
     "restart": "pm2 restart oh-to-png",
     "delete": "pm2 delete oh-to-png"
+  },
+  "bin": {
+    "oh-to-png": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -22,11 +26,11 @@
   },
   "homepage": "https://github.com/maniekes/oh-to-png#readme",
   "dependencies": {
-    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "js-yaml": "^4.1.0",
     "pageres": "^8.1.0",
     "pm2": "^5.4.3",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "yargs": "^17.7.2"
   }
 }
