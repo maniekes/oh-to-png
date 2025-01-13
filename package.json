@@ -1,6 +1,6 @@
 {
   "name": "oh-to-png",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "serve openhab panels as static images for embedded devices",
   "type": "module",
   "main": "index.js",
