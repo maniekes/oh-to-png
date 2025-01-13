@@ -24,7 +24,7 @@ Once installed, the PM2 process manager can be used to run `web2png` as a backgr
 
 1. Start the application with PM2 using the command:
    ```bash
-   pm2 start web2png --name web2png
+   pm2 start web2png --name web2png --interpreter none
    ```
 
 2. Save the PM2 process list to ensure it restarts after a systepm2m reboot:
