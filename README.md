@@ -1,4 +1,4 @@
-# oh-to-png
+# web2png
 i have couple of EspHome devices which are displaying weather/home status/temperatures etc. i love EspHome but i hate creating graphical interfaces using C/yaml/lvgl. for read-only panels i think this is too much overhead. instead i preffer to create nice design using proper html/css/js somwhere else and just load into them, 
 
 [HABPanel](https://www.openhab.org/docs/ui/habpanel/habpanel.html#the-main-menu) is something that fits perfectly into my area of interests

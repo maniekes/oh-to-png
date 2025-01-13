@@ -1,30 +1,38 @@
 {
-  "name": "oh-to-png",
+  "name": "web2png",
   "version": "0.9.0",
-  "description": "serve openhab panels as static images for embedded devices",
+  "description": "A Node.js tool to serve web pages as PNG images, ideal for OpenHAB HABPanel and other web integrations.",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "watch": "node --watch index.js",
-    "stop": "pm2 stop oh-to-png",
+    "stop": "pm2 stop web2png",
     "startup": "pm2 startup",
-    "restart": "pm2 restart oh-to-png",
-    "delete": "pm2 delete oh-to-png"
+    "restart": "pm2 restart web2png",
+    "delete": "pm2 delete web2png"
   },
   "bin": {
-    "oh-to-png": "./index.js"
+    "web2png": "./index.js"
   },
+  "keywords": [
+    "web2png",
+    "web pages to png",
+    "snapshot",
+    "OpenHAB",
+    "image rendering",
+    "screenshot"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maniekes/oh-to-png.git"
+    "url": "git+https://github.com/maniekes/web2png.git"
   },
   "author": "Rafal Klimonda",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maniekes/oh-to-png/issues"
+    "url": "https://github.com/maniekes/web2png/issues"
   },
-  "homepage": "https://github.com/maniekes/oh-to-png#readme",
+  "homepage": "https://github.com/maniekes/web2png#readme",
   "dependencies": {
     "express": "^4.21.2",
     "js-yaml": "^4.1.0",
