@@ -1,14 +1,59 @@
 # web2png
-i have couple of EspHome devices which are displaying weather/home status/temperatures etc. i love EspHome but i hate creating graphical interfaces using C/yaml/lvgl. for read-only panels i think this is too much overhead. instead i preffer to create nice design using proper html/css/js somwhere else and just load into them, 
 
-[HABPanel](https://www.openhab.org/docs/ui/habpanel/habpanel.html#the-main-menu) is something that fits perfectly into my area of interests
+I have a few EspHome devices that display weather, home status, temperatures, etc. While I enjoy using EspHome, I find
+creating graphical interfaces with C/YAML/LVGL tedious and overly complex, especially for read-only panels. Instead, I
+prefer designing a clean and aesthetically pleasing interface using HTML/CSS/JS elsewhere and then simply loading it
+onto the devices.
 
-this little script will help to render complex webpages with javascript into simple png file which can be easly transfered into dummy esphome device and they might look like this:
+[HABPanel](https://www.openhab.org/docs/ui/habpanel/habpanel.html#the-main-menu) fits perfectly for this purpose.
+
+This script renders complicated webpages with JavaScript into plain PNG files that can easily be transferred to dummy
+EspHome devices. The resulting output might look something like this:
+
 ![device](img/sample-device.png)
+
+### Usage of web2png
+
+The `web2png` program is designed to render complex webpages into PNG files efficiently. It can be installed globally
+via npm using the command:
+
+```bash
+npm i -g web2png
+```
+
+Once installed, the PM2 process manager can be used to run `web2png` as a background service:
+
+1. Start the application with PM2 using the command:
+   ```bash
+   pm2 start web2png --name web2png
+   ```
+
+2. Save the PM2 process list to ensure it restarts after a systepm2m reboot:
+   ```bash
+   pm2 save
+   ```
+
+3. Configure PM2 to start on startup:
+   ```bash
+   pm2 startup
+   ```
+
+The configuration file (`device-mappings.yml`) is essential for controlling how `web2png` renders webpages, specifying
+settings like resolution, delay, grayscale, and URL mappings for different devices. You can create or customize the
+configuration file according to your needs.
+
+By default, the application starts on port `3001`. This can be overridden using the `-p` option when starting `web2png`.
+You can also specify a custom configuration file using the `-c` option. For example:
+
+```bash
+web2png -c custom-config.yml -p 8080
+```
+
+This setup allows you to adapt `web2png` to match your preferred environment and workflow with minimal effort.
+
 
 ## sample config
 1. create some panels in habpanel for example
-1. check out this repo somewhere on ur server
 1. create device-mappings.yml file with resolutuon, links etc:
     ```yaml
     default:
@@ -20,14 +65,11 @@ this little script will help to render complex webpages with javascript into sim
     device_1:
         url: 'https://google.com'
     ```
-1. run `npm install`
+1. run `web2-png`
 1. test if it works:
-    - `npm run start`
     - open http://localhost:3001/screenshot?device=device_1
     - depending what u configured something like this should appear
-    ![sample output](img/sample-output.png)
-1. if all works fine install it as service  `npm run startup` (and follow instructions from pm2)
-2. you can browse logs using standard pm2 commands [check quickstart](https://pm2.keymetrics.io/docs/usage/quick-start/)
+    ![sample google](img/sample-google.png)
 
 ## sample usage in esphome:
 
