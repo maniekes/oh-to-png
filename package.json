@@ -5,8 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "watch": "node --watch index.js",
+    "start": "node web2png.js",
+    "watch": "node --watch web2png.js",
     "stop": "pm2 stop web2png",
     "startup": "pm2 startup",
     "restart": "pm2 restart web2png",
