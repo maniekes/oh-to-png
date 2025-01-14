@@ -13,7 +13,7 @@
     "delete": "pm2 delete web2png"
   },
   "bin": {
-    "web2png": "./index.js"
+    "web2png": "./web2png.js"
   },
   "keywords": [
     "web2png",
