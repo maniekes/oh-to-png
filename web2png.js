@@ -37,13 +37,23 @@ const yargsInstance = yargs(hideBin(process.argv))
         description: 'Port to run the server on',
         default: process.env.CONFIG_PORT || 3001,
     })
+    .option('print-sample-config', {
+        alias: 's',
+        type: 'boolean',
+        description: 'Print a sample device-mappings.yaml file and exit',
+        default: false,
+    })
+    .option('generate-sample', {
+        alias: 'g',
+        type: 'boolean',
+        description: 'Generate a sample config file (if not exists) and exit',
+        default: false,
+    })
     .help('h')
     .alias('h', 'help')
     .alias('v', 'version')
     .epilog(`Author: Rafal Klimonda\n` + `GitHub: https://github.com/maniekes/web2png\n` +
-        `License: Apache Commons 2.0\n\n` +
-        `Sample device-mappings.yaml configuration:\n` +
-        SAMPLE_CONFIG)
+        `License: Apache Commons 2.0`)
     .strict()
     .fail((msg, err) => {
         console.error(msg || err);
@@ -52,12 +62,30 @@ const yargsInstance = yargs(hideBin(process.argv))
     });
 const argv = yargsInstance.argv;
 
+if (argv['print-sample-config']) {
+    console.log("Sample device-mappings.yaml configuration:\n");
+    console.log(SAMPLE_CONFIG);
+    process.exit(0);
+}
+
+const configPath = argv.config;
+if (argv['generate-sample']) {
+    if (fs.existsSync(configPath)) {
+        console.log(`Configuration file already exists at: ${configPath}`);
+    } else {
+        console.log(`Generating sample configuration file at: ${configPath}`);
+        fs.writeFileSync(configPath, SAMPLE_CONFIG.trim(), 'utf-8');
+        console.log(`Sample configuration file created at: ${configPath}`);
+    }
+    process.exit(0);
+}
+
+
 function loadConfig(filePath) {
     const fileContents = fs.readFileSync(filePath, 'utf-8');
     return yaml.load(fileContents);
 }
 
-const configPath = argv.config;
 const configPort = argv.port;
 try {
     loadConfig(configPath);
