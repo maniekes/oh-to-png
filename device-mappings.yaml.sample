@@ -1,9 +1,13 @@
 default:
-    resolution: '960x540'
-    delay: 0
-    grayscale: true
-    negate: true
+  resolution: '1280x720'    # Default resolution for all devices
+  delay: 1000               # Delay in milliseconds to allow content to fully load
+  grayscale: false          # Render in color by default
+  negate: false             # Do not invert colors
 devices:
-# url is mandatory, you can also override any of defaults here
   device_1:
-    url: 'https://google.com'
+    url: 'https://example.com'  # Replace with your desired webpage URL
+    resolution: '1920x1080'     # Device-specific resolution override
+    delay: 2000                 # Additional delay for complex pages
+    grayscale: true             # Grayscale rendering enabled for this device
+  device_2:
+    url: 'https://example2.com' # URL for another device
