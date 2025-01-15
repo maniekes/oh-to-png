@@ -1,6 +1,6 @@
 {
   "name": "web2png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Node.js tool to serve web pages as PNG images, ideal for OpenHAB HABPanel and other web integrations.",
   "type": "module",
   "main": "index.js",
