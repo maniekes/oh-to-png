@@ -8,6 +8,20 @@ import yargs from "yargs";
 import {hideBin} from "yargs/helpers";
 
 const app = express();
+const SAMPLE_CONFIG = `default:
+  resolution: '1280x720'    # Default resolution for all devices
+  delay: 1000               # Delay in milliseconds to allow content to fully load
+  grayscale: false          # Render in color by default
+  negate: false             # Do not invert colors
+devices:
+  device_1:
+    url: 'https://example.com'  # Replace with your desired webpage URL
+    resolution: '1920x1080'     # Device-specific resolution override
+    delay: 2000                 # Additional delay for complex pages
+    grayscale: true             # Grayscale rendering enabled for this device
+  device_2:
+    url: 'https://example2.com' # URL for another device`;
+
 const yargsInstance = yargs(hideBin(process.argv))
     .scriptName("web2png")
     .usage('Usage: $0 [options]')
@@ -26,7 +40,10 @@ const yargsInstance = yargs(hideBin(process.argv))
     .help('h')
     .alias('h', 'help')
     .alias('v', 'version')
-    .epilog('Author: Rafal Klimonda\nGitHub: https://github.com/maniekes/web2png\nLicense: Apache Commons 2.0')
+    .epilog(`Author: Rafal Klimonda\n` + `GitHub: https://github.com/maniekes/web2png\n` +
+        `License: Apache Commons 2.0\n\n` +
+        `Sample device-mappings.yaml configuration:\n` +
+        SAMPLE_CONFIG)
     .strict()
     .fail((msg, err) => {
         console.error(msg || err);

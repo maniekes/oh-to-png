@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node web2png.js",
-    "watch": "node --watch web2png.js",
+    "watch": "node --watch web2png.js"
   },
   "bin": {
     "web2png": "web2png.js"
