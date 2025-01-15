@@ -36,11 +36,11 @@ Once installed, you can use the `web2png` command to generate PNG images from we
 The most basic usage is:
 
 ```bash
-web2png -c <config-file> -p <port>
+web2png
 ```
 or
 ```bash
-web2png
+web2png -c <config-file> -p <port>
 ```
 
 - **`-c`**: Specify a custom configuration file (default is `device-mappings.yml`).
