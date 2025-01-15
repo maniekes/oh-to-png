@@ -1,5 +1,10 @@
 # web2png
 
+`Web2PNG` is a lightweight web server that captures and serves web pages as PNG images, enabling easy integration with
+devices or systems that require static image representations of dynamic web content.
+
+## Background
+
 I have a few EspHome devices that display weather, home status, temperatures, etc. While I enjoy using EspHome, I find
 creating graphical interfaces with C/YAML/LVGL tedious and overly complex, especially for read-only panels. Instead, I
 prefer designing a clean and aesthetically pleasing interface using HTML/CSS/JS elsewhere and then simply loading it
@@ -13,42 +18,68 @@ EspHome devices. The resulting output might look something like this:
 ![device](img/sample-device.png)
 
 ## Usage of web2png
-The `web2png` program is designed to render complex webpages into PNG files efficiently. It can be installed globally
-via npm using the command:
+
+### Installation
+
+To install `web2png`, use the following npm command:
 
 ```bash
 npm i -g web2png
 ```
 
-Once installed, the PM2 process manager can be used to run `web2png` as a background service:
+This will install `web2png` globally on your system, making it available as a CLI command.
 
-1. Start the application with PM2 using the command:
-   ```bash
-   pm2 start web2png --name web2png --interpreter none
-   ```
+### Usage and Command-Line Parameters
 
-2. Save the PM2 process list to ensure it restarts after a systepm2m reboot:
-   ```bash
-   pm2 save
-   ```
+Once installed, you can use the `web2png` command to generate PNG images from web pages.
 
-3. Configure PM2 to start on startup:
-   ```bash
-   pm2 startup
-   ```
+The most basic usage is:
 
-The configuration file (`device-mappings.yml`) is essential for controlling how `web2png` renders webpages, specifying
-settings like resolution, delay, grayscale, and URL mappings for different devices. You can create or customize the
-configuration file according to your needs.
+```bash
+web2png -c <config-file> -p <port>
+```
+or
+```bash
+web2png
+```
 
-By default, the application starts on port `3001`. This can be overridden using the `-p` option when starting `web2png`.
-You can also specify a custom configuration file using the `-c` option. For example:
+- **`-c`**: Specify a custom configuration file (default is `device-mappings.yml`).
+- **`-p`**: Set a custom port (default is `3001`).
+
+Example:
 
 ```bash
 web2png -c custom-config.yml -p 8080
 ```
 
-This setup allows you to adapt `web2png` to match your preferred environment and workflow with minimal effort.
+Refer to the [Sample Configuration](#sample-configuration) chapter for details on configuring your `device-mappings.yml`
+file. This file allows you to define settings such as resolution, delay, grayscale, and URL mappings for different
+devices.
+
+### Running as a Daemon with PM2
+
+To run `web2png` as a background service, you can use the PM2 process manager. Follow these steps:
+
+1. Start the application with PM2:
+
+   ```bash
+   pm2 start web2png --name web2png --interpreter none
+   ```
+
+2. Save the PM2 process list to ensure it restarts after a system reboot:
+
+   ```bash
+   pm2 save
+   ```
+
+3. Configure PM2 to start on startup:
+
+   ```bash
+   pm2 startup
+   ```
+
+This setup allows the `web2png` application to run continuously in the background and restart automatically after
+reboots.
 
 ## Sample Configuration
 
@@ -88,19 +119,19 @@ online_image:
     update_interval: never
     type: grayscale
     on_error:
-       then:
-          - logger.log: error downloading!
+      then:
+        - logger.log: error downloading!
     on_download_finished:
-       then:
-          - logger.log: image downloaded
-          - component.update: eink_display
-          - deep_sleep.enter
+      then:
+        - logger.log: image downloaded
+        - component.update: eink_display
+        - deep_sleep.enter
   display:
-     - platform: t547
-       id: eink_display
-       update_interval: never
-       lambda: |-
-          it.image(0, 0, id(my_online_image), COLOR_OFF, COLOR_ON);
+    - platform: t547
+      id: eink_display
+      update_interval: never
+      lambda: |-
+        it.image(0, 0, id(my_online_image), COLOR_OFF, COLOR_ON);
 ```
 
 This YAML snippet demonstrates how to use the `web2png` output in ESPHome to handle and display the rendered PNG images
