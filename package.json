@@ -7,10 +7,6 @@
   "scripts": {
     "start": "node web2png.js",
     "watch": "node --watch web2png.js",
-    "stop": "pm2 stop web2png",
-    "startup": "pm2 startup",
-    "restart": "pm2 restart web2png",
-    "delete": "pm2 delete web2png"
   },
   "bin": {
     "web2png": "web2png.js"
@@ -37,7 +33,6 @@
     "express": "^4.21.2",
     "js-yaml": "^4.1.0",
     "pageres": "^8.1.0",
-    "pm2": "^5.4.3",
     "sharp": "^0.33.5",
     "yargs": "^17.7.2"
   }
