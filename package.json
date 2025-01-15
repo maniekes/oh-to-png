@@ -24,7 +24,7 @@
     "url": "git+https://github.com/maniekes/web2png.git"
   },
   "author": "Rafal Klimonda",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/maniekes/web2png/issues"
   },
