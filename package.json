@@ -24,7 +24,7 @@
     "url": "git+https://github.com/maniekes/web2png.git"
   },
   "author": "Rafal Klimonda",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/maniekes/web2png/issues"
   },

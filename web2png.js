@@ -53,7 +53,7 @@ const yargsInstance = yargs(hideBin(process.argv))
     .alias('h', 'help')
     .alias('v', 'version')
     .epilog(`Author: Rafal Klimonda\n` + `GitHub: https://github.com/maniekes/web2png\n` +
-        `License: Apache Commons 2.0`)
+        `License: MIT`)
     .strict()
     .fail((msg, err) => {
         console.error(msg || err);
