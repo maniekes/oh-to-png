@@ -126,7 +126,7 @@ app.get('/screenshot', async (req, res) => {
             if (grayscale) {
                 buffer
                     .grayscale()
-                    .toFormat('png', {bitdepth: 8});
+                    .toFormat('png', {colours: 16});
             }
             if (negate) {
                 buffer.negate();
